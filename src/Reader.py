@@ -11,26 +11,6 @@ import random
 
 class Helper:
     
-    def readValuesFromFile(self):
-        f = open("linregdata", "r")
-        x = []
-        y = []
-        s=f.readline()
-        sex=0
-        while s!="":
-            a = s.split(',')
-            if a[0]=='F':
-                sex=[1,1,0,0]
-            elif a[0]=='I':
-                sex=[1,0,1,0]
-            else:
-                sex=[1,0,0,1]
-            x1 = [sex[0],sex[1],sex[2],sex[3], float(a[1]), float(a[2]), float(a[3]),float(a[4]),float(a[5]),float(a[6]),float(a[7])] 
-            x.append(x1)
-            y.append(float(a[8].split('\n')[0]))
-            s=f.readline()
-        return [np.array(x),np.array(y).transpose()]
-    
     
     ## This function extracts features from file w.r.t. Heart Rates. 
     # @params:     isAbnormal        :      It should be given 1 is abnormal else 0
