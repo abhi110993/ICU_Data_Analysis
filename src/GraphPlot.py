@@ -1,6 +1,29 @@
+"""
+
+# Author: Abhishek Mishra
+# MTech Student
+# IIT Ropar
+# Entry Number- 2018CSM1002
+
+"""
+
+from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 
 class Plots:
+    
+    def plot3DGraph(self,x1, y1, z1,x2, y2, z2,xlabel,ylabel,zlabel,title):
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        ax.scatter(x1, y1, z1, c='r', marker='o')
+        ax.scatter(x2, y2, z2, c='b', marker='o')
+        ax.set_xlabel(xlabel)
+        ax.set_ylabel(ylabel)
+        ax.set_zlabel(zlabel)
+        plt.title(title)
+        plt.show()
+        
+        
     
     def combinePlot(self,x,y1,y2,xmin,xlim,ymin,ylim,instances,title,xaxisLabel,yaxisLabel):
         fig = plt.figure(instances)

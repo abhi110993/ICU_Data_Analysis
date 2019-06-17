@@ -20,15 +20,15 @@ class Helper:
         else:
             f = open("out_normal.csv", "r")
         x = []
-        y = []
+        s=f.readline()
         s=f.readline()
         while s!="":
             a = s.split(',')
+            #print(a)
             x1 = [float(a[0]),float(a[1]),float(a[2])] 
             x.append(x1)
-            y.append(float(isAbnormal))
             s=f.readline()
-        return [np.array(x),np.array(y).transpose()]
+        return np.array(x)
     
     def standardizeTestingSet(self,X,mean,std):
         for i in range(0,len(X)):
