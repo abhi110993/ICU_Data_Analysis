@@ -8,6 +8,7 @@
 """
 import numpy as np
 import random
+import csv
 
 class Helper:
     
@@ -27,6 +28,70 @@ class Helper:
             #print(a)
             x1 = [float(a[0]),float(a[1]),float(a[2])] 
             x.append(x1)
+            s=f.readline()
+        return np.array(x)
+    
+    def readRespFromFile(self, isAbnormal):
+        if(isAbnormal==1):
+            f = open("out_abnormal.csv", "r")
+        else:
+            f = open("out_normal.csv", "r")
+        x = []
+        s=f.readline()
+        s=f.readline()
+        while s!="":
+            a = s.split(',')
+            #print(a)
+            x1 = [float(a[3]),float(a[4]),float(a[5])] 
+            x.append(x1)
+            s=f.readline()
+        return np.array(x)
+    
+    def readOxygenFromFile(self, isAbnormal):
+        if(isAbnormal==1):
+            f = open("out_abnormal.csv", "r")
+        else:
+            f = open("out_normal.csv", "r")
+        x = []
+        s=f.readline()
+        s=f.readline()
+        while s!="":
+            a = s.split(',')
+            #print(a)
+            x1 = [float(a[6]),float(a[7]),float(a[8])] 
+            x.append(x1)
+            s=f.readline()
+        return np.array(x)
+    
+    def readBPFromFile(self, isAbnormal):
+        if(isAbnormal==1):
+            f = open("out_abnormal.csv", "r")
+        else:
+            f = open("out_normal.csv", "r")
+        x = []
+        s=f.readline()
+        s=f.readline()
+        while s!="":
+            a = s.split(',')
+            #print(a)
+            x1 = [float(a[3]),float(a[4]),float(a[5])] 
+            x.append(x1)
+            s=f.readline()
+        return np.array(x)
+    
+    def readAllParametersFromFile(self, isAbnormal):
+        if(isAbnormal==1):
+            f = open("out_abnormal.csv", "r")
+        else:
+            f = open("out_normal.csv", "r")
+        x = []
+        s=f.readline()
+        s=f.readline()
+        while s!="":
+            a = s.split(',')
+            for i in range(0,len(a)):
+                a[i] = float(a[i])
+            x.append(a)
             s=f.readline()
         return np.array(x)
     
@@ -60,4 +125,33 @@ class Helper:
                 testInput.append(X[i])
                 testOutput.append(Y[i])
         return [trainInput,trainOutput,testInput,testOutput]
+
+    def featureTransformToDegree2(self, x):
+        newData=[]
+        for i in range(0,len(x)):
+            arr=[]
+            for j in range(0,len(x[0])):
+                for k in range(j,len(x[0])):
+                    arr.append(x[i][j]*x[i][k])
+            newData.append(arr)
+        
+        return np.array(newData)
+    
+    def featureTransformToDegree3(self, x):
+        newData=[]
+        for i in range(0,len(x)):
+            arr=[]
+            for j in range(0,len(x[0])):
+                for k in range(j,len(x[0])):
+                    for l in range(k,len(x[0])):
+                        arr.append(x[i][j]*x[i][k]*x[i][l])
+            newData.append(arr)
+        
+        return np.array(newData)
+    
+    def writeDataIntoCSVFile(self,a,fileName):
+        with open(fileName, 'w',newline='') as writeFile:
+            writer = csv.writer(writeFile)
+            writer.writerows(a)
+        writeFile.close()
     
